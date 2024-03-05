@@ -1,6 +1,24 @@
 import styled, { css } from "styled-components";
 
-const sizes = {
+type TSizes = {
+  small: any;
+  medium: any;
+  large: any;
+ }
+
+ type TVariation = {
+  primary: any;
+  secondary: any;
+  danger: any;
+ }
+
+ type TButton = { 
+  defaultProps : {
+    variation: string,
+    size: string } 
+ }
+ 
+const sizes: TSizes = {
   small: css`
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
@@ -20,7 +38,7 @@ const sizes = {
   `,
 };
 
-const variations = {
+const variations: TVariation = {
   primary: css`
     color: var(--color-brand-50);
     background-color: var(--color-brand-600);
@@ -47,3 +65,19 @@ const variations = {
     }
   `,
 };
+
+const Button: TButton = styled.button`
+  border: none;
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
+
+  ${(props: any) => sizes[props.size as keyof TSizes]}
+  ${(props: any) => variations[props.variation as keyof TVariation]}
+`;
+
+Button.defaultProps = {
+  variation: "primary",
+  size: "medium",
+};
+
+export default Button;
