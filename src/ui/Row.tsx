@@ -1,16 +1,16 @@
 import styled, { css } from "styled-components";
 
-const Row = styled.div`
+const Row: any = styled.div`
   display: flex;
 
-  ${(props) =>
+  ${(props: any) =>
     props.type === "horizontal" &&
     css`
       justify-content: space-between;
       align-items: center;
     `}
 
-  ${(props) =>
+  ${(props: any) =>
     props.type === "vertical" &&
     css`
       flex-direction: column;
