@@ -1,3 +1,4 @@
+import React, { } from "react";
 import styled, { css } from "styled-components";
 
 type TSizes = {
@@ -12,8 +13,8 @@ type TSizes = {
   danger: any;
  }
 
- type TButton = { 
-  defaultProps : {
+ interface TButton extends React.ButtonHTMLAttributes<any> { 
+  defaultProps? : {
     variation: string,
     size: string } 
  }

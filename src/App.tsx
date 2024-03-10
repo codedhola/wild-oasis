@@ -10,13 +10,25 @@ import Login from './pages/Login'
 import Users from './pages/Users'
 import AppLayout from './ui/AppLayout'
 import GlobalStyles from './styles/GlobalStyles'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000
+      }
+    }
+  })
+
   return (
-    <>
-    <GlobalStyles />
-    <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <GlobalStyles />
+      <BrowserRouter>
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="dashboard" />} />
@@ -32,7 +44,21 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </>
+      <Toaster position='top-right' gutter={12} containerStyle={{ margin: "8px"}} toastOptions={{ 
+        success: { 
+          duration: 3000 
+        }, 
+        error: { 
+          duration: 7000 
+        }, 
+        style: { 
+        fontSize: "18px",
+        maxWidth: "400x",
+        padding: "16px 25px",
+        background: "var(--color-grey-0)",
+        color: "var(--color-grey-700"
+      }}} />
+    </QueryClientProvider>
   )
 }
 
