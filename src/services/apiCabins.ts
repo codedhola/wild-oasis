@@ -46,13 +46,13 @@ const { data: storageData, error: storageError } = await supabase
     upsert: false
   })
 
-  if (storageError) {
-    await supabase.from("cabins").delete().eq("id", data.id);
-    console.error(storageError);
-    throw new Error(
-      "Cabin image could not be uploaded and the cabin was not created"
-    );
-  }
+  // if (storageError) {
+  //   await supabase.from("cabins").delete().eq("id", data.id);
+  //   console.error(storageError);
+  //   throw new Error(
+  //     "Cabin image could not be uploaded and the cabin was not created"
+  //   );
+  // }
 
 return data
 
