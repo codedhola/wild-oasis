@@ -58,7 +58,7 @@ function CabinRow({ cabin }: Props){
   const { isCreating, createCabin } = useCreateCabin();
 
 
-  console.log("Cabin ", cabin)
+  // console.log("Cabin ", cabin)
   const {
     id: cabinId,
     name,
@@ -72,8 +72,8 @@ function CabinRow({ cabin }: Props){
   function handleDuplicate() {
     createCabin({
       name: `Copy of ${name}`,
-      maxCapacity,
-      regularPrice,
+      max_capacity,
+      regular_price,
       discount,
       image,
       description,
