@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import CreateCabinForm from "../features/cabins/CreateCabinForm";
+import { HiXMark } from "react-icons/hi2";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -48,3 +50,22 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+type Props = { 
+  closeModal: () => void,
+}
+
+export default function Modal({ closeModal }: Props){
+
+  return (
+    <Overlay>
+      <StyledModal>
+        <Button onClick={closeModal}>
+          <HiXMark></HiXMark>
+        </Button>
+        <div>
+          <CreateCabinForm closeModal={closeModal} />
+        </div>
+      </StyledModal>
+    </Overlay>
+  )
+}

@@ -13,11 +13,11 @@ type TSizes = {
   danger: any;
  }
 
- interface TButton extends React.ButtonHTMLAttributes<any> { 
-  defaultProps? : {
-    variation: string,
-    size: string } 
- }
+ interface TButton extends React.ButtonHTMLAttributes<HTMLButtonElement> { 
+    variation?: string,
+    size?: string 
+  } 
+ 
  
 const sizes: TSizes = {
   small: css`
@@ -67,7 +67,7 @@ const variations: TVariation = {
   `,
 };
 
-const Button: TButton = styled.button`
+const Button = styled.button<TButton>`
   border: none;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
