@@ -6,14 +6,14 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createCabin } from "../../services/apiCabins";
+import {  useQueryClient } from "@tanstack/react-query";
 import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useEditCabin";
 
 type Props = {
-  cabinToEdit: any
+  cabinToEdit?: any,
+  closeModal: () => void
 }
 
 const Label = styled.label`
@@ -25,7 +25,7 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
-function CreateCabinForm({ cabinToEdit = {} }: Props) {
+function CreateCabinForm({ cabinToEdit = {}, closeModal }: Props) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isEditing, editCabin } = useEditCabin();
   const isWorking = isCreating || isEditing;
@@ -47,6 +47,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
         {
           onSuccess: (formData: any) => {
             reset();
+            closeModal?.()
           },
         }
       );
@@ -56,6 +57,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
         {
           onSuccess: (formData: any) => {
             reset();
+            closeModal?.()
           },
         }
       );
@@ -65,7 +67,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
     console.log("Error Logging... ")
   }
   return (
-    <Form onSubmit={handleSubmit(submitForm, onError)}>
+    <Form type="modal" onSubmit={handleSubmit(submitForm, onError)}>
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input type="text" id="name" {...register("name", { required: "Name is required"})} disabled={isWorking} defaultValue={cabinToEdit.name} />
       </FormRow>
@@ -99,7 +101,7 @@ function CreateCabinForm({ cabinToEdit = {} }: Props) {
       </FormRow>
 
       <FormRow label="">
-        <Button variation="secondary" type="reset">
+        <Button variation="secondary" type="reset" onClick={closeModal}>
           Cancel
         </Button>
         <Button disabled={isWorking}>Submit cabin</Button>
