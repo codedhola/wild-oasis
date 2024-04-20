@@ -13,7 +13,7 @@ import { useEditCabin } from "./useEditCabin";
 
 type Props = {
   cabinToEdit?: any,
-  closeModal: () => void
+  closeModal?: () => void
 }
 
 const Label = styled.label`
