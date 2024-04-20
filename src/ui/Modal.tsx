@@ -3,6 +3,7 @@ import CreateCabinForm from "../features/cabins/CreateCabinForm";
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
 import { cloneElement, createContext, useContext, useState } from "react";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -91,15 +92,17 @@ function Open({ children, opens } : OpenProps){
 function Window({ children, name}: WindowProps){
   const { closeModal, openName }  = useContext<any>(ModalContext)
 
+  const ref:any = useOutsideClick(closeModal)
+
   if(name !== openName) return null
   return createPortal(
     <Overlay>
-      <StyledModal>
+      <StyledModal ref={ref}>
         <Button onClick={closeModal}>
           <HiXMark></HiXMark>
         </Button>
         <div>
-          {children}
+        {cloneElement(children  as React.ReactElement<any>, { closeModal })}
         </div>
       </StyledModal>
     </Overlay>,

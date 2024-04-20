@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useDeleteCabin } from "./useDeleteCabin";
 import { useCreateCabin } from "./useCreateCabin";
 import CreateCabinForm from "./CreateCabinForm";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const TableRow = styled.div`
   display: grid;
@@ -52,7 +54,6 @@ type Props = {
 
 
 function CabinRow({ cabin }: Props){
-  const [showForm, setShowForm] = useState<boolean>(false);
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { isCreating, createCabin } = useCreateCabin();
 
@@ -93,15 +94,28 @@ function CabinRow({ cabin }: Props){
             <button disabled={isCreating} onClick={handleDuplicate}>
               <HiSquare2Stack />
             </button>
-            <button onClick={() => setShowForm((show) => !show)}>
-              <HiPencil />
-            </button>
-            <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
-              <HiTrash />
-            </button>
+            <Modal>
+              <Modal.Open opens="edit">
+                <button>
+                  <HiPencil />
+                </button>
+              </Modal.Open>
+              <Modal.Window name="edit">
+               <CreateCabinForm cabinToEdit={cabin} />
+              </Modal.Window>
+            </Modal>
+            <Modal>
+              <Modal.Open opens="delete">
+                <button>
+                  <HiTrash />
+                </button>
+              </Modal.Open>
+              <Modal.Window name="delete">
+                <ConfirmDelete resourceName="cabin" disabled={isDeleting} onConfirm={() => deleteCabin(cabinId)} />
+              </Modal.Window>
+            </Modal>
           </div>
       </TableRow>
-    {showForm && <CreateCabinForm cabinToEdit={cabin} />}
     </>
   )
 }
