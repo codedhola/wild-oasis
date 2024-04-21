@@ -1,23 +1,22 @@
 import React, { useState } from 'react'
 import Button from '../../ui/Button'
 import Modal from '../../ui/Modal'
+import CreateCabinForm from './CreateCabinForm'
+import CabinTable from './CabinTable'
 
 type Props = {}
 
 const AddCabin = ({}: Props): React.ReactElement => {
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
-
-  const onCloseModal = () => {
-    setIsOpenModal(false)
-  }
 
   return (
-    <div>
-      <Button onClick={() => setIsOpenModal((val) => !val)}>Add New Cabin</Button>
-        {
-        isOpenModal && <Modal closeModal={onCloseModal} />
-        }
-    </div>
+    <Modal>
+      <Modal.Open opens="cabin-form">
+        <Button>Add New Cabin</Button>
+      </Modal.Open>
+      <Modal.Window name="cabin-form">
+        <CreateCabinForm />
+      </Modal.Window>
+    </Modal>
   )
 }
 
