@@ -5,6 +5,7 @@ import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import Table from "../../ui/Table";
 import React from "react";
+import Menus from "../../ui/Menus";
 
 // const Table = styled.div`
 //   border: 1px solid var(--color-grey-200);
@@ -44,36 +45,28 @@ function CabinTable() {
   if (isLoading) return <Spinner />;
 
   return (
-    <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
-      <React.Fragment>
-        <Table.Header>
-          <React.Fragment>
-            <div></div>
-            <div>Cabin</div>
-            <div>Capacity</div>
-            <div>Price</div>
-            <div>Discount</div>                                            
-            <div></div>
-          </React.Fragment>
-        </Table.Header>
-        {cabins?.map((cabin: any) => (
-          <CabinRow cabin={cabin} key={cabin.id} />
-        ))}
-      </React.Fragment>
-    </Table>
-    // <Table role="table">
-    //   <TableHeader role="row">
-    //     <div></div>
-    //     <div>Cabin</div>
-    //     <div>Capacity</div>
-    //     <div>Price</div>
-    //     <div>Discount</div>                                                                                                                                                                                                                 
-    //     <div></div>
-    //   </TableHeader>
-    //   {cabins?.map((cabin: any) => (
-    //     <CabinRow cabin={cabin} key={cabin.id} />
-    //   ))}
-    // </Table>
+    <Menus>
+      <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+        <React.Fragment>
+          <Table.Header>
+            <React.Fragment>
+              <div></div>
+              <div>Cabin</div>
+              <div>Capacity</div>
+              <div>Price</div>
+              <div>Discount</div>                                            
+              <div></div>
+            </React.Fragment>
+          </Table.Header>
+          <Table.Body 
+          data={cabins}
+          render={(cabin: any) => (
+            <CabinRow cabin={cabin} key={cabin.id} />
+          )}
+          />
+        </React.Fragment>
+      </Table>
+    </Menus>
   );
 }
 
