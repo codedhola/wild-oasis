@@ -85,7 +85,7 @@ type RowProps = {
 
 type BodyProps = {
   data: any;
-  render: React.ReactNode
+  render: (cabin: any) => JSX.Element
 }
 
 const TableContext = createContext<ContextProps | null>(null)
