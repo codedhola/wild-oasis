@@ -54,6 +54,13 @@ function CabinTable() {
   if(filteredValue === "no-discount") filteredCabin = cabins?.filter((cabin: any) => cabin.discount !== 0)
   console.log(filteredCabin)
 
+  const sortBy = searchParams.get("sortBy") || "startDate-asc";
+  const [field, direction] = sortBy.split("-");
+  const modifier = direction === "asc" ? 1 : -1;
+  const sortedCabins = filteredCabin.sort(
+    (a: any, b: any) => (a[field] - b[field]) * modifier
+  );
+
   return (
     <Menus>
       <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
