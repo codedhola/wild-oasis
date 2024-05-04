@@ -21,10 +21,10 @@ export function useAllBookings(){
 
   // PAGINATION
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
-  const { isLoading, error, data: bookings } = useQuery({
+  const { isLoading, error, data: { data: bookings, count} } = useQuery({
     queryKey: ["bookings", filter, sortBy, page],
     queryFn: () => getAllBookings({ filter, sortBy, page})
   })
 
-  return { bookings, isLoading, error }
+  return { bookings, count, isLoading, error }
 }
