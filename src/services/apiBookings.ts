@@ -10,18 +10,18 @@ export async function getAllBookings({ filter, sortBy, page }: any) {
       { count: "exact" }
     );
 
-  // if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
+  if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
 
-  // if (sortBy)
-  //   query = query.order(sortBy.field, {
-  //     ascending: sortBy.direction === "asc",
-  //   });
+  if (sortBy)
+    query = query.order(sortBy.field, {
+      ascending: sortBy.direction === "asc",
+    });
 
-  // if (page) {
-  //   const from = (page - 1) * PAGE_SIZE;
-  //   const to = from + PAGE_SIZE - 1;
-  //   query = query.range(from, to);
-  // }
+  if (page) {
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+    query = query.range(from, to);
+  }
 
   const { data, error, count } = await query;
 

@@ -34,6 +34,13 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
+const statusToTagName: { [key: string]: string } = {
+  unconfirmed: "unconfirmed",
+  "checked-in": "checked-in",
+  "checked-out": "checked-out",
+};
+
+
 function BookingRow({
   booking: {
     id: bookingId,
@@ -49,38 +56,34 @@ function BookingRow({
   },
 }: any) {
 
-  console.log("Booking Data ==> ", bookingId, num_guests)
-  const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
-  };
-
   return (
     <Table.Row>
-      <Cabin>{cabinName}</Cabin>
+      <>
+        <Cabin>{cabinName}</Cabin>
 
-      <Stacked>
-        <span>{guestName}</span>
-        <span>{email}</span>
-      </Stacked>
+        <Stacked>
+          <span>{guestName}</span>
+          <span>{email}</span>
+        </Stacked>
 
-      <Stacked>
-        <span>
-          {isToday(new Date(start_date))
-            ? "Today"
-            : formatDistanceFromNow(start_date)}{" "}
-          &rarr; {num_nights} night stay
-        </span>
-        <span>
-          {format(new Date(start_date), "MMM dd yyyy")} &mdash;{" "}
-          {format(new Date(end_date), "MMM dd yyyy")}
-        </span>
-      </Stacked>
+        <Stacked>
+          <span>
+            {isToday(new Date(start_date))
+              ? "Today"
+              : formatDistanceFromNow(start_date)}{" "}
+            &rarr; {num_nights} night stay
+          </span>
+          <span>
+            {format(new Date(start_date), "MMM dd yyyy")} &mdash;{" "}
+            {format(new Date(end_date), "MMM dd yyyy")}
+          </span>
+        </Stacked>
 
-      {/* <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag> */}
+        <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
 
-      <Amount>{formatCurrency(total_price)}</Amount>
+        <Amount>{formatCurrency(total_price)}</Amount>
+      
+      </>
     </Table.Row>
   );
 }
