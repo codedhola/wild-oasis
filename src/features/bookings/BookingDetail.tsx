@@ -16,14 +16,12 @@ const HeadingGroup = styled.div`
   align-items: center;
 `;
 
-function BookingDetail() {
-  const booking = {};
-  const status = "checked-in";
-
+function BookingDetail({ booking }: any) {  
+  const { status, id: bookingId } = booking
   const moveBack = useMoveBack();
 
-  const statusToTagName = {
-    unconfirmed: "blue",
+  const statusToTagName : any = {
+    "unconfirmed": "blue",
     "checked-in": "green",
     "checked-out": "silver",
   };
@@ -32,13 +30,13 @@ function BookingDetail() {
     <>
       <Row type="horizontal">
         <HeadingGroup>
-          <Heading as="h1">Booking #X</Heading>
+          <Heading as="h1">Booking {bookingId}</Heading>
           <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
         </HeadingGroup>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      <BookingDataBox booking={booking} />
+      {booking && <BookingDataBox booking={booking} />}
 
       <ButtonGroup>
         <Button variation="secondary" onClick={moveBack}>
