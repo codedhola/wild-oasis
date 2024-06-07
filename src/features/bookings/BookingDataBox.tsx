@@ -77,9 +77,9 @@ const Price = styled.div<any>`
   margin-top: 2.4rem;
 
   background-color: ${(props: any) =>
-    props.isPaid ? "var(--color-green-100)" : "var(--color-yellow-100)"};
+    props.is_paid ? "var(--color-green-100)" : "var(--color-yellow-100)"};
   color: ${(props: any) =>
-    props.isPaid ? "var(--color-green-700)" : "var(--color-yellow-700)"};
+    props.is_paid ? "var(--color-green-700)" : "var(--color-yellow-700)"};
 
   & p:last-child {
     text-transform: uppercase;
@@ -114,7 +114,7 @@ function BookingDataBox({ booking }: { booking: any }) {
     total_price,
     has_breakfast,
     observations,
-    isPaid,
+    is_paid,
     guests: { fullName: guestName, email, country, country_flag, nationalID },
     cabins: { name: cabinName },
   } = booking || {};
@@ -163,7 +163,7 @@ function BookingDataBox({ booking }: { booking: any }) {
           {has_breakfast ? "Yes" : "No"}
         </DataItem>
 
-        <Price isPaid={isPaid}>
+        <Price is_paid={is_paid}>
           <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
             {formatCurrency(total_price)}
 
@@ -173,7 +173,7 @@ function BookingDataBox({ booking }: { booking: any }) {
               )} breakfast)`}
           </DataItem>
 
-          <p>{isPaid ? "Paid" : "Will pay at property"}</p>
+          <p>{is_paid ? "Paid" : "Will pay at property"}</p>
         </Price>
       </Section>
 

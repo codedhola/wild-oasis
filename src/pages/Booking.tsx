@@ -1,16 +1,16 @@
 import BookingDetail from '../features/bookings/BookingDetail'
-import { useBooking } from '../features/bookings/useBookings';
+import { useBooking } from '../features/bookings/useBooking';
+import Spinner from '../ui/Spinner';
 
 type Props = {}
 
 const Booking = ({ }: Props) => {
+  const { booking, isLoading } = useBooking()
 
-  const { booking } = useBooking()
+  if(isLoading) return <Spinner />
 
   return (
-    <div>
       <BookingDetail booking={booking} />
-    </div>
   )
 }
 
