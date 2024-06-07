@@ -10,6 +10,7 @@ import ButtonText from "../../ui/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useNavigate } from "react-router-dom";
+import { useCheckout } from "../check-in-out/useCheckout";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -28,6 +29,8 @@ function BookingDetail({ booking }: any) {
     "checked-out": "silver",
   };
 
+  const { checkout, isCheckingOut } = useCheckout()
+
   return (
     <>
       <Row type="horizontal">
@@ -41,9 +44,14 @@ function BookingDetail({ booking }: any) {
       {booking && <BookingDataBox booking={booking} />}
 
       <ButtonGroup>
-      {status === "unconfirmed" && (
-          <Button onClick={() => navigate(`/check-in/${bookingId}`)}>
-            Check in
+        {status === "unconfirmed" && (
+            <Button onClick={() => navigate(`/check-in/${bookingId}`)}>
+              Check in
+            </Button>
+          )}
+        {status === "checked-in" && (
+          <Button disabled={isCheckingOut} onClick={() => checkout(bookingId)}>
+            Check out
           </Button>
         )}
         <Button variation="secondary" onClick={moveBack}>
