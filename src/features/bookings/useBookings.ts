@@ -47,13 +47,3 @@ export function useAllBookings(){
   return { bookings: bookings?.data, count: bookings?.count, isLoading, error }
 }
 
-export function useBooking(){
-  const params = useParams();
-
-  const { data: booking, isLoading, error } = useQuery({
-    queryKey: ["bookings"],
-    queryFn: () => getBooking(params.id)
-  })
-
-  return { booking, isLoading, error }
-}
