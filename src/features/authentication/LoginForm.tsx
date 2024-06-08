@@ -3,15 +3,22 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
+import { useLogin } from "./useLogin";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login, isLogin } = useLogin()
 
-  function handleSubmit() {}
+  function handleSubmit(e: Event) {
+
+    e.preventDefault()
+    if(!email || !password) return 
+    login({ email, password })
+  }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} type="regular">
       <FormRowVertical label="Email address">
         <Input
           type="email"
@@ -32,7 +39,7 @@ function LoginForm() {
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button size="large">Login</Button>
+        <Button size="large" disabled={isLogin}>Login</Button>
       </FormRowVertical>
     </Form>
   );

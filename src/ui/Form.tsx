@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
 
 interface IForm {
-  type?: "modal" | "regular"; // Define the type for the 'type' prop
+  type?: "modal" | "regular";
+  onSubmit?: (e: any) => void
 }
 
 const Form = styled.form<IForm>`
