@@ -3,8 +3,8 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-
 import { useUpdateUser } from "./useUpdateUser";
+
 
 function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
@@ -12,7 +12,7 @@ function UpdatePasswordForm() {
 
   const { updateUser, isUpdating } = useUpdateUser();
 
-  function onSubmit({ password }: { password: string}) {
+  function onSubmit({ password }: { password: string}): any {
     updateUser({ password }, { onSuccess: reset });
   }
 
@@ -53,7 +53,7 @@ function UpdatePasswordForm() {
           })}
         />
       </FormRow>
-      <FormRow>
+      <FormRow label={"Update password"}>
         <Button onClick={reset} type="reset" variation="secondary">
           Cancel
         </Button>
