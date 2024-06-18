@@ -4,6 +4,7 @@ import Heading from "../../ui/Heading";
 import Row from "../../ui/Row";
 import { useTodayActivities } from "./useTodayActivity";
 import Spinner from "../../ui/Spinner";
+import TodayItem from "./TodayItem";
 
 const StyledToday = styled.div`
   /* Box */
@@ -38,9 +39,10 @@ const NoActivity = styled.p`
   margin-top: 0.8rem;
 `;
 
-function Today() {
+export default function TodayActivities() {
 
   const { isPending, activities } = useTodayActivities()
+  
   return (
     <StyledToday>
       <Row type="horizontal">
@@ -49,9 +51,9 @@ function Today() {
       {!isPending ? (
         activities?.length! > 0 ? (
           <TodayList>
-            {/* {activities.map((activity) => (
+            {activities?.map((activity) => (
               <TodayItem activity={activity} key={activity.id} />
-            ))} */}
+            ))}
           </TodayList>
         ) : (
           <NoActivity>No activity today...</NoActivity>
@@ -63,4 +65,3 @@ function Today() {
   );
 }
 
-export default Today;

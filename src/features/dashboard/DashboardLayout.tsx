@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import Today from "../check-in-out/TodayActivity";
+import TodayActivities from "../check-in-out/TodayActivity";
 import { useRecentBookings } from "./useRecentBookings";
 import { useRecentStays } from "./useRecentStays";
 import Spinner from "../../ui/Spinner";
 import { Stats } from "./Stats";
 import { useCabins } from "../cabins/useCabin";
 import { SalesChart } from "./SalesChart";
+import { DurationChart } from "./DurationChart";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -24,8 +25,8 @@ export function DashboardLayout(){
   return (
     <StyledDashboardLayout>
       <Stats bookings={bookings} confirmedStays={confirmedStays} numDays={numDays} cabinCount={Number(cabins?.length)} />
-      <Today />
-      <div>charts</div>
+      <TodayActivities />
+      <DurationChart confirmedStays={confirmedStays} />
       <SalesChart bookings={bookings} numDays={numDays} />
     </StyledDashboardLayout>
   )
