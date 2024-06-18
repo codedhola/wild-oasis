@@ -167,9 +167,10 @@ export function DurationChart ({ confirmedStays }: Props) {
           </Pie>
           <Tooltip />
           <Legend
-            verticalAlign="middle"
+            verticalAlign="top"
             align="right"
-            width="30%"
+            width={100}
+            height={100}
             layout="vertical"
             iconSize={15}
             iconType="circle"

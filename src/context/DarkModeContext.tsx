@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect } from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
 
-const DarkModeContext = createContext<any>();
+const DarkModeContext = createContext<any>({});
 
 function DarkModeProvider({ children }: any) {
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(

@@ -14,7 +14,6 @@ const StyledSalesChart = styled(DashboardBox)`
     stroke: var(--color-grey-300);
   }
 `;
-const isDarkMode = true;
 
 
 type Props = {
