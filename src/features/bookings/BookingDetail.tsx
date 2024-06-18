@@ -14,6 +14,7 @@ import { useCheckout } from "../check-in-out/useCheckout";
 import { useDeleteBooking } from "./useDeleteBooking";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
+import Empty from "../../ui/Empty";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -22,6 +23,9 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail({ booking }: any) {  
+
+  if (!booking) return <Empty resource="booking" />;
+
   const moveBack = useMoveBack();
   const navigate = useNavigate()
   const { id: bookingId, status } = booking
