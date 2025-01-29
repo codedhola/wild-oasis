@@ -15,9 +15,8 @@ function UpdatePasswordForm() {
   function onSubmit({ password }: { password: string}): any {
     updateUser({ password }, { onSuccess: reset });
   }
-
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit((data) => onSubmit(data as { password: string }))}>
       <FormRow
         label="Password (min 8 characters)"
         error={errors?.password?.message}

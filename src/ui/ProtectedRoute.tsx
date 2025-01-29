@@ -18,7 +18,7 @@ type Props = {
 
 const ProtectedRoute = ({ children }: Props) => {
   const navigate = useNavigate()
-  const { user, isPending, isAuthenticated } = useUser()
+  const { isPending, isAuthenticated } = useUser()
 
   useEffect(() => {
     if(!isAuthenticated && !isPending) return navigate("/login") 

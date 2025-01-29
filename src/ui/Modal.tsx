@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import CreateCabinForm from "../features/cabins/CreateCabinForm";
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
 import { cloneElement, createContext, useContext, useState } from "react";

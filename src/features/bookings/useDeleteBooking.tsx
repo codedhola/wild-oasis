@@ -9,7 +9,7 @@ export function useDeleteBooking(){
   const { mutate: deleteBook, isPending: isDeleting } = useMutation({
     mutationFn: (id: string) => deleteBooking(id),
 
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success(`Booking Successfully Deleted`)
       queryClient.invalidateQueries({
         queryKey: ["bookings"]

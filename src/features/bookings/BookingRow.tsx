@@ -51,11 +51,9 @@ const statusToTagName: { [key: string]: string } = {
 function BookingRow({
   booking: {
     id: bookingId,
-    created_at,
     start_date,
     end_date,
     num_nights,
-    num_guests,
     total_price,
     status,
     guests: { fullName: guestName, email },
@@ -63,7 +61,7 @@ function BookingRow({
   },
 }: any) {
   const navigate = useNavigate()
-  const { checkout, isCheckingOut } = useCheckout()
+  const { checkout } = useCheckout()
   const { deleteBook, isDeleting } = useDeleteBooking()
 
   return (

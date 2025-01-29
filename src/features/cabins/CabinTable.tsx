@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import styled from "styled-components";
 import { getCabins } from "../../services/apiCabins";
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
@@ -37,8 +36,7 @@ function CabinTable() {
   const {
     isLoading,
     data: cabins,
-    error,
-  } = useQuery({
+    } = useQuery({
     queryKey: ["cabins"],
     queryFn: getCabins,
   });
@@ -77,7 +75,7 @@ function CabinTable() {
           <Table.Body 
           data={filteredCabin}
           render={(cabin: any) => (
-            <CabinRow cabin={cabin} key={filteredCabin.id} />
+            <CabinRow cabin={cabin} key={sortedCabins.id} />
           )}
           />
         </React.Fragment>

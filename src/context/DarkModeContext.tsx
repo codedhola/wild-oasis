@@ -4,7 +4,7 @@ import { useLocalStorageState } from "../hooks/useLocalStorageState";
 const DarkModeContext = createContext<any>({});
 
 function DarkModeProvider({ children }: any) {
-  const [isDarkMode, setIsDarkMode] = useLocalStorageState(
+  const [isDarkMode, setIsDarkMode] = useLocalStorageState<boolean>(
     window.matchMedia("(prefers-color-scheme: dark)").matches,
     "isDarkMode"
   );

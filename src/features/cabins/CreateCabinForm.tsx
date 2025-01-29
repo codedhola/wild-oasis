@@ -6,7 +6,6 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
-import {  useQueryClient } from "@tanstack/react-query";
 import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useEditCabin";
@@ -20,11 +19,6 @@ const Label = styled.label`
   font-weight: 500;
 `;
 
-const Error = styled.span`
-  font-size: 1.4rem;
-  color: var(--color-red-700);
-`;
-
 function CreateCabinForm({ cabinToEdit = {}, closeModal }: Props) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isEditing, editCabin } = useEditCabin();
@@ -33,7 +27,8 @@ function CreateCabinForm({ cabinToEdit = {}, closeModal }: Props) {
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
 
-  const queryClient = useQueryClient()
+  console.log("Edit Values ", editValues)
+
   const { register, handleSubmit, reset, getValues, formState} = useForm()
   
   const { errors } = formState
@@ -45,7 +40,7 @@ function CreateCabinForm({ cabinToEdit = {}, closeModal }: Props) {
       editCabin(
         { newCabinData: { image, name: formData.name, max_capacity: formData.maxCapacity, regular_price: formData.regularPrice, discount: formData.discount, description: formData.description }, id: editId },
         {
-          onSuccess: (formData: any) => {
+          onSuccess: () => {
             reset();
             closeModal?.()
           },
@@ -55,7 +50,7 @@ function CreateCabinForm({ cabinToEdit = {}, closeModal }: Props) {
       createCabin(
         { ...formData, image: image },
         {
-          onSuccess: (formData: any) => {
+          onSuccess: () => {
             reset();
             closeModal?.()
           },
@@ -64,7 +59,7 @@ function CreateCabinForm({ cabinToEdit = {}, closeModal }: Props) {
   }
 
   const onError = (err: any) => {
-    console.log("Error Logging... ")
+    console.log("Error Logging... ", err)
   }
   return (
     <Form type="modal" onSubmit={handleSubmit(submitForm, onError)}>
