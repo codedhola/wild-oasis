@@ -29,7 +29,7 @@ const StyledToggle = styled.button`
   }
 `;
 
-const StyledList = styled.ul.attrs(() => ({}))`
+const StyledList = styled.ul<{ position: { x: number; y: number } }>`
   position: fixed;
 
   background-color: var(--color-grey-0);
@@ -104,12 +104,12 @@ function Toggle({ id }: any){
 }
 
 function List({ id, children }: any){
-  const { openId, close} = useContext(MenusContext)
+  const { openId, close, position} = useContext(MenusContext)
   const ref = useOutsideClick(close);
 
   if(openId !== id) return null
   return createPortal(
-    <StyledList  ref={ref}>{children}</StyledList>,
+    <StyledList position={position} ref={ref}>{children}</StyledList>,
     document.body
     )
 }
