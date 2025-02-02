@@ -121,7 +121,13 @@ function Row({ children }: RowProps) {
 function Body({ data, render }: BodyProps) {
   if (!data.length) return <Empty>No data to show at the moment</Empty>;
 
-  return <StyledBody>{data.map(render)}</StyledBody>;
+  return (
+    <StyledBody>
+      {data.map((item: any, index: any) => (
+        <React.Fragment key={index}>{render(item)}</React.Fragment>
+      ))}
+    </StyledBody>
+  );
 }
 Table.Header = Header
 Table.Row = Row

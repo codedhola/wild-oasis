@@ -60,6 +60,7 @@ export default function Filter({ filterField, options}: FilterProps){
     <StyledFilter>
       {options?.map((val: any) => 
         <FilterButton 
+        key={val.value}
         onClick={() => handleClick(val.value)}
         active={val.value === currentFilter}
         disabled={val.value === currentFilter}
